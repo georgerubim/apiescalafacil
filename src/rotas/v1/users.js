@@ -21,6 +21,14 @@ routes.post("/v1/createUser", async (req,res)=>{
         res.json({message:"Usuário já existe", status_code:"400"})
     }
 })
+routes.post("/v1/deleteUser", async (req,res)=>{
+    const findUser = await User.deleteOne({
+        email: req.body.email,
+        senha: req.body.senha
+    }).then(()=>{
+        res.json({message:"Usuário deletado com sucesso", status_code:"200"})
+    })
+})
 routes.post("/v1/findUser", async (req,res)=>{
     const finduser = await User.find({
         email: req.body.email,
